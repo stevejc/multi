@@ -15,3 +15,14 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
+
+
+jQuery(function($) {
+
+// makes tr's clickable
+$("tr[data-link]").click(function() {
+  window.location = this.dataset.link
+});
+
+})

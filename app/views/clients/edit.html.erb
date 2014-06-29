@@ -1,0 +1,22 @@
+<div class="col-md-6 col-md-offset-3 panel panel-default">
+  <div class="panel-body">
+    <h2>Edit a Client</h2>
+      <%= form_for @client do |f| %>
+      <%= form_group_for f, :name, opts= {:label => "Client Name"} do %>
+          <%= f.text_field :name, class: 'form-control' %>
+      <% end %>
+      <%= form_group_for f, :address do %>
+          <%= f.text_area :address, class: 'form-control' %>
+      <% end %>
+<div class="form-actions">
+      <%= f.submit class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', @client, :class => 'btn' %>
+      <%= link_to ' Delete', client_path(@client), confirm: 'Are you sure you want to delete this client, no take backsies?', method: :delete, :class => 'btn float_right' %>
+<% end %>
+
+
+       
+</div>
+  </div>
+</div>
+

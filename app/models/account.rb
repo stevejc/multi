@@ -11,16 +11,16 @@
 #
 
 class Account < ActiveRecord::Base
-      RESTRICTED_SUBDOMAINS = %w(www)
-      has_one :user
-      belongs_to :owner, class_name: 'User'
+  cattr_accessor :current_id
+  has_one :user
+  belongs_to :owner, class_name: 'User'
 
-      validates :owner, presence: true
+  validates :owner, presence: true
 
 
-      accepts_nested_attributes_for :owner
+  accepts_nested_attributes_for :owner
 
-      before_validation :downcase_subdomain
+  before_validation :downcase_subdomain
       
 
 end
