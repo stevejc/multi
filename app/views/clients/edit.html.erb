@@ -1,5 +1,6 @@
 <div class="col-md-6 col-md-offset-3 panel panel-default">
   <div class="panel-body">
+  <%= render 'layouts/error' %>
     <h2>Edit a Client</h2>
       <%= form_for @client do |f| %>
       <%= form_group_for f, :name, opts= {:label => "Client Name"} do %>

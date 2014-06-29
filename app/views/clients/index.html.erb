@@ -1,26 +1,20 @@
-<div class="container">
-  <div class="row">
-    <div class="span6">
-    <%= render 'layouts/error' %>
-    	<h3>Clients</h3>
-    </div>
-  </div>
+<%= render 'layouts/error' %>
+<h3>Clients</h3>
 
-  <table class="table table-hover">
-    <tr>
-      <th>Client name</th>
-      <th>Address</th>
-    </tr>
+<table class="table table-hover">
+  <tr>
+    <th>Client name</th>
+    <th>Address</th>
+  </tr>
 
-  <% @clients.each do |client| %>
-    <tr data-link="<%= client_path(client) %>">
-      <td><%= client.name %></td>
-      <td><%= client.address.gsub(/\n/, '<br/>').html_safe %></td>
-    </tr>
-  <% end %>
-  </table>
+<% @clients.each do |client| %>
+  <tr data-link="<%= client_path(client) %>">
+    <td><%= client.name %></td>
+    <td><%= client.address.gsub(/\n/, '<br/>').html_safe %></td>
+  </tr>
+<% end %>
+</table>
 
-  <br/>
+<br/>
 
-  <%= link_to 'Add a New Client', new_client_path, :class => 'btn' %>
-</div>
+<%= link_to 'Add a New Client', new_client_path, :class => 'btn' %>
