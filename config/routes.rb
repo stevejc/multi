@@ -3,6 +3,7 @@ Multi::Application.routes.draw do
   root 'welcome#index'
   resources :accounts
   resources :clients
+  resources :users
 
   get 'pricing', to: 'welcome#pricing'
 end
