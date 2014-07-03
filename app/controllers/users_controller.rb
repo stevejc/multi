@@ -1,9 +1,18 @@
 class UsersController < ApplicationController
-  before_action :only_owners, only: [ :edit, :update, :index ]
+  before_action :only_owners, only: [ :edit, :update, :index, :destroy ]
   
   def index
     @users = current_account.users.all
-
+    @user = User.new
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'User was successfully deleted.' }
+      format.json { head :no_content }
+    end
   end
   
   private
@@ -13,4 +22,7 @@ class UsersController < ApplicationController
         redirect_to root_path # halts request cycle
       end
     end
+    
+
+    
 end

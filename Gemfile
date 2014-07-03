@@ -8,7 +8,8 @@ gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-gem 'devise'
+gem 'devise', '~> 3.2.2'
+gem 'devise_invitable', '~> 1.3.4'
 gem 'bootstrap-sass'
 
 # Use CoffeeScript for .js.coffee assets and views
@@ -31,6 +32,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
+  gem 'letter_opener'
 end
 
 group :doc do

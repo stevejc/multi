@@ -1,4 +1,5 @@
-<div class="col-md-8 col-md-offset-2">
+<%= render 'layouts/error' %>
+<div class="col-md-10 col-md-offset-1">
   <h2>Authorized Users</h2>
 
   <div class="panel panel-default">
@@ -9,6 +10,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Status</th>
+            <th>Remove Access</th>
           </tr>
         </thead>
         <tbody>
@@ -17,13 +19,22 @@
               <td><%= user.email %></td>
               <td><%= user.email %></td>
               <td><%= user_status(user) %></td>
+              <td><%= link_to '', user_path(user), confirm: 'Are you sure you want to delete this user, no take backsies?', method: :delete, :class => 'glyphicon glyphicon-remove text-danger' %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
       
       <h3 class="extra-margin-top">Invite User</h3>
+      <%= form_for(User.new, url: user_invitation_path,
+                                          html: { class: 'form-inline' }) do |f| %>
+        <div class="form-group">
+          <%= f.text_field :email, placeholder: "Enter email", label: false, class: "form-control" %>
+        </div>
+        <%= f.submit 'Invite User', class: 'btn btn-primary' %>
+      <% end %>
 
     </div>
   </div>
 </div>
+

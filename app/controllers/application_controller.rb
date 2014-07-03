@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
   ensure
     Account.current_id = nil
   end
+  
+  def after_invite_path_for(resource)
+    users_path
+  end
+  
 
   
 end
