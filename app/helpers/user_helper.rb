@@ -1,6 +1,6 @@
 module UserHelper
   def user_status(user)
-    if current_account.id == user.account_id
+    if current_account.owner == user || user.invitation_accepted?
       content_tag(:span, '', class: 'glyphicon glyphicon-ok text-success')
     else
       'Invitation Pending'

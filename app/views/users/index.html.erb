@@ -29,12 +29,14 @@
       <%= form_for(User.new, url: user_invitation_path,
                                           html: { class: 'form-inline' }) do |f| %>
         <div class="form-group">
+          <%= f.hidden_field :account_id, :value => current_account.id %>
           <%= f.text_field :email, placeholder: "Enter email", label: false, class: "form-control" %>
         </div>
         <%= f.submit 'Invite User', class: 'btn btn-primary' %>
       <% end %>
-
     </div>
   </div>
 </div>
+
+
 

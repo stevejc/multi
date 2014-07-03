@@ -4,6 +4,6 @@ Multi::Application.routes.draw do
   resources :accounts
   resources :clients
   resources :users
-
+  
   get 'pricing', to: 'welcome#pricing'
 end
