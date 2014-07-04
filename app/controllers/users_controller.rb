@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :only_owners, only: [ :edit, :update, :index, :destroy ]
+  before_action :can_not_delete_owner, only: [:destroy]
+  
   
   def index
     @users = current_account.users.all
@@ -9,10 +11,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully deleted.' }
-      format.json { head :no_content }
-    end
+    redirect_to users_url, notice: 'User was successfully deleted.'
   end
   
   private
@@ -23,6 +22,10 @@ class UsersController < ApplicationController
       end
     end
     
-
-    
+    def can_not_delete_owner
+      if params[:id] == current_account.owner_id.to_s
+        flash[:alert] = "You are not able to delete the owner of this account."
+        redirect_to :back
+      end
+  end
 end
