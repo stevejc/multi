@@ -8,6 +8,9 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  plan       :string(255)
+#  phone      :string(255)
+#  email      :string(255)
+#  address    :text
 #
 
 class Account < ActiveRecord::Base

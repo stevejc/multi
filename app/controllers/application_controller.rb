@@ -29,6 +29,13 @@ class ApplicationController < ActionController::Base
     users_path
   end
   
+  def only_owners(page)             
+    if current_account.owner_id != current_user.id
+      flash[:alert] = "You must be the account owner to access the #{page} page."
+      redirect_to root_path # halts request cycle
+    end
+  end
+  
 
   
 end

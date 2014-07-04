@@ -1,0 +1,22 @@
+<div class="col-md-6 col-md-offset-3 panel panel-default">
+  <div class="panel-body">
+    <%= render 'layouts/error' %>
+    <h2>Edit Account Settings</h2>
+    <%= form_for @account do |f| %>
+      <%= form_group_for f, :name, opts= {:label => "Company Name"} do %>
+          <%= f.text_field :name, class: 'form-control', :autofocus => true %>
+      <% end %>
+      <%= form_group_for f, :phone, opts= {:label => "Company Phone"} do %>
+          <%= f.text_field :phone, class: 'form-control' %>
+      <% end %>
+      <%= form_group_for f, :email, opts= {:label => "Company Email"} do %>
+          <%= f.text_field :email, class: 'form-control' %>
+      <% end %>
+      <%= form_group_for f, :address, opts= {:label => "Company Address"} do %>
+          <%= f.text_area :address, class: 'form-control', rows: 5, cols: 40 %>
+      <% end %>
+
+      <%= f.submit class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
