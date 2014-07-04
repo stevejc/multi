@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702020320) do
+ActiveRecord::Schema.define(version: 20140704160123) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
-    t.string   "subdomain"
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "plan"
   end
 
   create_table "clients", force: true do |t|

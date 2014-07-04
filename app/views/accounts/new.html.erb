@@ -1,7 +1,9 @@
 <div class="col-md-6 col-md-offset-3 panel panel-default">
   <div class="panel-body">
-
-    <h2>Create an Account</h2>
+    <div class="page-header">
+      <h2>Try the <%=@account.plan.capitalize %> Plan</h2>
+      <h2>Free for a 30 Day Trial</h2>
+    </div>
 
     <%= form_for @account do |f| %>
       <%= f.fields_for :owner do |o| %>
@@ -15,7 +17,7 @@
           <%= o.password_field :password_confirmation, class: 'form-control' %>
         <% end %>
       <% end %>
-      
+      <%= f.hidden_field :plan, :value => @account.plan %>
       <%= form_group_for f, :name, opts= {:label => "Company Name"} do %>
           <%= f.text_field :name, class: 'form-control' %>
       <% end %>

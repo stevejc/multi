@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   def new
-    @account = Account.new
+    @account = Account.new(plan: params[:plan])
     @account.build_owner
   end
   
@@ -16,6 +16,6 @@ class AccountsController < ApplicationController
 
   private
     def account_params
-      params.require(:account).permit(:name, owner_attributes: [:account_id, :email, :password, :password_confirmation])
+      params.require(:account).permit(:name, :plan, owner_attributes: [:account_id, :email, :password, :password_confirmation])
     end
 end

@@ -8,9 +8,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
+        <% if user_signed_in? %>
+        <%= link_to current_account.name, root_path, class: "navbar-brand" %>
+        <% else %>
         <%= link_to 'Multi', root_path, class: "navbar-brand" %>
+        <% end %>
       </div>
-
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
@@ -21,7 +24,7 @@
           <% else %>
             <li><%= link_to "Features", root_path %></li>
             <li><%= link_to "Pricing", pricing_path %></li>
-            <li><%= link_to "Try Multi Free", new_account_path %></li>
+            <li><%= link_to "Try Multi Free", new_account_path(:plan => 'gold') %></li>
             <li><%= link_to "Login", new_user_session_path %></li>
           <% end %>
         </ul>
