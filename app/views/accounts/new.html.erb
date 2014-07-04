@@ -8,7 +8,7 @@
     <%= form_for @account do |f| %>
       <%= f.fields_for :owner do |o| %>
         <%= form_group_for o, :email do %>
-          <%= o.text_field :email, class: 'form-control' %>
+          <%= o.text_field :email, class: 'form-control', autofocus: true %>
         <% end %>
         <%= form_group_for o, :password do %>
           <%= o.password_field :password, class: 'form-control' %>

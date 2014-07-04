@@ -3,7 +3,7 @@
     <h2>Add a Client</h2>
       <%= form_for @client do |f| %>
       <%= form_group_for f, :name, opts= {:label => "Client Name"} do %>
-          <%= f.text_field :name, class: 'form-control' %>
+          <%= f.text_field :name, class: 'form-control', autofocus: true %>
       <% end %>
       <%= form_group_for f, :address do %>
           <%= f.text_area :address, class: 'form-control' %>
