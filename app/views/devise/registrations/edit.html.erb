@@ -20,10 +20,12 @@
           <%= f.password_field :password_confirmation, class: 'form-control' %>
       <% end %>
       
+<% if false %>    
       <%= form_group_for f, :current_password do %>
           <%= f.password_field :current_password, class: 'form-control' %>
       <% end %>
-      
+<% end %> 
+    
       <%= f.submit "Update Account", class: 'btn btn-primary' %>
     <% end %>
   </div>
