@@ -16,7 +16,7 @@
         <tbody>
           <% @users.each do |user| %>
             <tr>
-              <td><%= user.email %></td>
+              <td><%= user.name %></td>
               <td><%= user.email %></td>
               <td><%= user_status(user) %>
                 <% unless current_account.owner == user || user.invitation_accepted? %>
@@ -38,9 +38,12 @@
       
       <h3 class="extra-margin-top">Invite User</h3>
       <%= form_for(User.new, url: user_invitation_path,
-                                          html: { class: 'form-inline' }) do |f| %>
-        <div class="form-group">
-          <%= f.hidden_field :account_id, :value => current_account.id %>
+                                          html: { class: 'row' }) do |f| %>
+        <%= f.hidden_field :account_id, :value => current_account.id %>
+        <div class="col-xs-4">
+          <%= f.text_field :name, placeholder: "Enter name", label: false, class: "form-control" %>
+        </div>
+        <div class="col-xs-4">
           <%= f.text_field :email, placeholder: "Enter email", label: false, class: "form-control" %>
         </div>
         <%= f.submit 'Invite User', class: 'btn btn-primary' %>
