@@ -15,12 +15,14 @@
 
 class Account < ActiveRecord::Base
   cattr_accessor :current_id
-  has_many :users
+
   belongs_to :owner, class_name: 'User'
+  has_many :user_accounts
+  has_many :users, through: :user_accounts
+  has_many :clients
 
   validates :owner, presence: true
   validates :name, presence: true
-
 
   accepts_nested_attributes_for :owner
       

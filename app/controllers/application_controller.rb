@@ -11,11 +11,16 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:invite).concat([:account_id, :name])
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :current_password) }
   end
+  
+  def after_sign_in_path_for(resource_or_scoped)
+    users_path
+  end
 
   private
 
   def current_account
-  current_user.account if current_user
+    session[:account] = current_user.user_accounts.first.account_id if session[:account].nil?
+    current_user.user_accounts.find_by_account_id(session[:account]).account
   end
   helper_method :current_account
   

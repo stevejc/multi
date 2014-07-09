@@ -10,8 +10,9 @@ class AccountsController < ApplicationController
   
   def create
     @account = Account.new(account_params)
+    @user_account = UserAccount.new()
     if @account.save
-      @account.owner.update(account_id: @account.id) 
+      UserAccount.create(account_id: @account.id, user_id: @account.owner_id)
       redirect_to root_path, notice: 'Successfully Created Account!'
     else
       render action: 'new'
@@ -33,6 +34,16 @@ class AccountsController < ApplicationController
         format.json { render json: @client.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def change_account
+    if current_user.user_accounts.any? {|h| h[:account_id] == params[:account].to_i}
+      session[:account] = params[:account]
+      flash[:notice]= 'Successfully Changed Account!'
+    else
+      flash[:alert]= 'No access to this Account!'
+    end
+    redirect_to users_path
   end
 
   private

@@ -32,8 +32,8 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
-  belongs_to :account
   has_one :owned_account, class_name: 'Account', foreign_key: 'owner_id'
+  has_many :user_accounts
+  has_many :accounts, through: :user_accounts
   
-
 end
