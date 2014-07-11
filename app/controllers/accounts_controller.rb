@@ -37,8 +37,8 @@ class AccountsController < ApplicationController
   end
   
   def change_account
-    if current_user.user_accounts.any? {|h| h[:account_id] == params[:account].to_i}
-      session[:account] = params[:account]
+    if current_user.user_accounts.any? {|h| h[:account_id] == params[:user_account][:id].to_i}
+      session[:account] = params[:user_account][:id]
       flash[:notice]= 'Successfully Changed Account!'
     else
       flash[:alert]= 'No access to this Account!'

@@ -35,20 +35,14 @@
           <% end %>
         </tbody>
       </table>
-      <%= session[:account] %>
-      <%= form_tag change_account_path do %>
-
-          <%= label_tag :account %>
-          <%= text_field_tag :account %>
-
-
-          <%= submit_tag "Sign in", class: "btn btn-large btn-primary" %>
-        <% end %>
+      <%= form_tag change_account_path, :class => "row" do %> 
+        <div class="col-xs-4">
+          <%= collection_select :user_account, :id, current_user.user_accounts.map { |x| OpenStruct.new(:id => x.account_id, :name => x.account.name) }, :id, :name, {prompt: "Select an account"}, {class: "form-control"}  %>
+        </div>
+        <%= submit_tag "Select Account", class: "btn btn-large btn-primary" %>
+        
+      <% end %>
       
-      
-      
-      
-      <%= link_to "Change Account", change_account_path %>
       <h3 class="extra-margin-top">Invite User</h3>
       <%= form_for(User.new, url: invite_path,
                                           html: { class: 'row' }) do |f| %>
