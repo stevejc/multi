@@ -24,6 +24,7 @@
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
 #  invitations_count      :integer          default(0)
+#  name                   :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -35,5 +36,7 @@ class User < ActiveRecord::Base
   has_one :owned_account, class_name: 'Account', foreign_key: 'owner_id'
   has_many :user_accounts
   has_many :accounts, through: :user_accounts
+  
+  accepts_nested_attributes_for :user_accounts
   
 end

@@ -24,7 +24,6 @@ class AccountsController < ApplicationController
       UserAccount.create(account_id: @account.id, user_id: @account.owner_id)
       redirect_to root_path, notice: 'Successfully Created Account!'
     else
-      raise "oh no"
       render action: 'new'
     end
   end
