@@ -8,4 +8,5 @@ Multi::Application.routes.draw do
   post 'invite', to: 'user_accounts#invite_user'
   
   get 'pricing', to: 'welcome#pricing'
+  get 'add_account', to: 'accounts#add_another_account'
 end

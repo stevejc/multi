@@ -4,8 +4,20 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   around_filter :scope_current_account
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  after_filter :store_location
 
   protected
+  def store_location
+    # store last url - this is needed for post-login redirect to whatever the user last visited.
+    return unless request.get? 
+    if (request.path != "/users/sign_in" &&
+        request.path != "/users/sign_up" &&
+        request.path != "/users/password/new" &&
+        request.path != "/users/sign_out" &&
+        !request.xhr?) # don't store ajax calls
+      session[:previous_url] = request.fullpath 
+    end
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:invite).concat([:account_id, :name])
@@ -13,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
   
   def after_sign_in_path_for(resource_or_scoped)
-    users_path
+    session[:previous_url] || root_path
   end
 
   private

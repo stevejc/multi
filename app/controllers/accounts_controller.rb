@@ -1,20 +1,30 @@
 class AccountsController < ApplicationController
+  before_action :authenticate_user!, only: [:add_another_account] 
   before_action only: [:edit, :update] do
     only_owners("Settings")
   end
   
+  def add_another_account
+    @account = Account.new(plan: params[:plan])
+    render 'new'
+  end
+  
   def new
     @account = Account.new(plan: params[:plan])
-    @account.build_owner
+    unless current_user
+      @account.build_owner
+    end
   end
   
   def create
     @account = Account.new(account_params)
+    @account.owner_id = current_account.owner_id if current_account
     @user_account = UserAccount.new()
     if @account.save
       UserAccount.create(account_id: @account.id, user_id: @account.owner_id)
       redirect_to root_path, notice: 'Successfully Created Account!'
     else
+      raise "oh no"
       render action: 'new'
     end
   end
