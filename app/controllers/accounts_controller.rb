@@ -1,8 +1,7 @@
 class AccountsController < ApplicationController
   before_action :authenticate_user!, only: [:add_another_account] 
-  before_action only: [:edit, :update] do
-    only_owners("Settings")
-  end
+  before_action :only_billing, only: [:edit, :update]
+
   
   def add_another_account
     @account = Account.new(plan: params[:plan])
@@ -72,6 +71,13 @@ class AccountsController < ApplicationController
   private
     def account_params
       params.require(:account).permit(:owner_id, :name, :plan, :email, :phone, :address, owner_attributes: [:account_id, :name, :email, :password, :password_confirmation])
+    end
+    
+    def only_billing            
+      if current_account.owner_id != current_user.id || !current_user.user_accounts.where('user_id = ? and account_id=?', current_user.id, current_account.id).first.billing
+        flash[:alert] = "You must be the account owner or billing liaison to access the settings page."
+        redirect_to root_path # halts request cycle
+      end
     end
     
 end
