@@ -15,9 +15,18 @@
       <%= form_group_for f, :address, opts= {:label => "Company Address"} do %>
           <%= f.text_area :address, class: 'form-control', rows: 5, cols: 40 %>
       <% end %>
-
       <%= f.submit class: 'btn btn-primary' %>
     <% end %>
+    
+    
+    <h4>Change Account Owner</h4>
+    <%= form_for @account do |f| %>
+      <%= form_group_for f, :owner_id, opts= {:label => "Account Owner"} do %>
+          <%= f.collection_select :owner_id, current_account.users, :id, :name, {prompt: "Select a user"}, {class: "form-control"} %>
+      <% end %>
+      <%= f.submit "Change Owner", class: 'btn btn-primary' %>
+    <% end %>
+
     
     <h4>Don't need Multi Anymore?</h4>
     <p>If Multi just isn't right for you, you can cancel your account hassle-free.</p>

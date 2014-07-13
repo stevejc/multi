@@ -25,7 +25,6 @@ class AccountsController < ApplicationController
       session[:account] = @account.id
       redirect_to root_path, notice: 'Successfully Created Account!'
     else
-      r
       render action: 'new'
     end
   end
@@ -72,7 +71,7 @@ class AccountsController < ApplicationController
 
   private
     def account_params
-      params.require(:account).permit(:name, :plan, :email, :phone, :address, owner_attributes: [:account_id, :name, :email, :password, :password_confirmation])
+      params.require(:account).permit(:owner_id, :name, :plan, :email, :phone, :address, owner_attributes: [:account_id, :name, :email, :password, :password_confirmation])
     end
     
 end
