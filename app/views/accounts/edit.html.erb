@@ -18,5 +18,35 @@
 
       <%= f.submit class: 'btn btn-primary' %>
     <% end %>
+    
+    <h4>Don't need Multi Anymore?</h4>
+    <p>If Multi just isn't right for you, you can cancel your account hassle-free.</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Cancel your account forever</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>You'll never get charged for Multi again</td>
+        </tr>
+        <tr>
+          <td>Erase all of clients, accounts and data permanently.</td>
+        </tr>
+        <tr>
+          <td>Start all over again when you need to manage multi.</td>
+        </tr>
+        <tr>
+          <td>Canceling this account will not effect any other accounts you own.</td>
+        </tr>
+        <tr>
+          <td>We'll be sorry to see you go!</td>
+        </tr>
+        <tr>
+          <td><%= link_to "Cancel your account", account_path(@account), confirm: 'Are you sure you want to delete this account, no take backsies?', method: :delete %></td>
+        </tr>
+      </tbody>
+    </table>   
   </div>
 </div>

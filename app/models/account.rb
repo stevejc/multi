@@ -17,9 +17,9 @@ class Account < ActiveRecord::Base
   cattr_accessor :current_id
 
   belongs_to :owner, class_name: 'User'
-  has_many :user_accounts
+  has_many :user_accounts, dependent: :destroy
   has_many :users, through: :user_accounts
-  has_many :clients
+  has_many :clients, dependent: :destroy
 
   validates :owner, presence: true
   validates :name, presence: true

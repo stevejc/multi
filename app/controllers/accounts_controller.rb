@@ -18,12 +18,14 @@ class AccountsController < ApplicationController
   
   def create
     @account = Account.new(account_params)
-    @account.owner_id = current_account.owner_id if current_account
+    @account.owner_id = current_account.owner_id if current_user
     @user_account = UserAccount.new()
     if @account.save
       UserAccount.create(account_id: @account.id, user_id: @account.owner_id)
+      session[:account] = @account.id
       redirect_to root_path, notice: 'Successfully Created Account!'
     else
+      r
       render action: 'new'
     end
   end
@@ -53,6 +55,19 @@ class AccountsController < ApplicationController
       flash[:alert]= 'No access to this Account!'
     end
     redirect_to users_path
+  end
+  
+  def destroy
+    @account = Account.find(params[:id])
+    @account.destroy
+    session.delete(:account)
+    if current_user.user_accounts.count == 0
+      current_user.destroy
+      flash[:notice]= 'Your Account and User ID were successfully deleted.'
+    else
+      flash[:notice]= 'Account was successfully deleted.'
+    end
+    redirect_to root_url
   end
 
   private
