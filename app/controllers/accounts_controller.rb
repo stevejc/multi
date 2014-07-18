@@ -74,7 +74,7 @@ class AccountsController < ApplicationController
     end
     
     def only_billing            
-      if current_account.owner_id != current_user.id || !current_user.user_accounts.where('user_id = ? and account_id=?', current_user.id, current_account.id).first.billing
+      if current_account.owner_id != current_user.id && !current_user.user_accounts.where('user_id = ? and account_id=?', current_user.id, current_account.id).first.billing
         flash[:alert] = "You must be the account owner or billing liaison to access the settings page."
         redirect_to root_path # halts request cycle
       end

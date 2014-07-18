@@ -9,7 +9,26 @@
           <span class="icon-bar"></span>
         </button>
         <% if user_signed_in? %>
-        <%= link_to current_account.name, root_path, class: "navbar-brand" %>
+          <% if current_user.user_accounts.count > 1 %>
+            <div class="btn-group">
+              <%= link_to current_account.name, root_path, id: "header_button", class: "btn btn-default btn-lg" %>
+
+              <button type="button" id= "header_button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Switch Accounts</a></li>
+                <li class="divider"></li>
+                <% current_user.user_accounts.each do |user| %>
+                <li><%= link_to user.account.name, change_account_path(:user_account => { :id => user.account.id }), :method => :post %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% else %>
+            <%= link_to current_account.name, root_path, class: "navbar-brand" %>
+          <% end %>
+
         <% else %>
         <%= link_to 'Multi', root_path, class: "navbar-brand" %>
         <% end %>
@@ -18,9 +37,11 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left">
         <% if user_signed_in? %>
-  				<li><%= link_to "Clients", clients_path %></li>	
-  				<% if current_user == current_account.owner %>
+  				<li><%= link_to "Clients", clients_path %></li>
+  				<% if current_user == current_account.owner || current_user.user_accounts.where('user_id = ? and account_id=?', current_user.id, current_account.id).first.admin %>
     				<li><%= link_to "Users", users_path %></li>
+    				<% end %>	
+  				<% if current_user == current_account.owner || current_user.user_accounts.where('user_id = ? and account_id=?', current_user.id, current_account.id).first.billing %>
     				<li><%= link_to "Settings", edit_account_path(current_account) %></li>
   				<% end %>					
   			<% else %>

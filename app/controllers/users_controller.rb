@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
-  before_action only: [:edit, :update, :index, :destroy] do
-    only_owners("Users")
-  end
+  before_action :only_admin, only: [:edit, :update, :index, :destroy] 
   before_action :can_not_delete_owner, only: [:destroy]
   
   
@@ -41,9 +39,16 @@ class UsersController < ApplicationController
         flash[:alert] = "You are not able to delete the owner of this account."
         redirect_to :back
       end
-  end
+    end
+    
+    def only_admin           
+      if current_account.owner_id != current_user.id && !current_user.user_accounts.where('user_id = ? and account_id=?', current_user.id, current_account.id).first.admin
+        flash[:alert] = "You must be the account owner or admin user to access the users page."
+        redirect_to root_path # halts request cycle
+      end
+    end   
 
-  def user_params
-    params.require(:user).permit(:name, :email, user_accounts_attributes: [:id, :admin, :billing] )
-  end
+    def user_params
+      params.require(:user).permit(:name, :email, user_accounts_attributes: [:id, :admin, :billing] )
+    end
 end
