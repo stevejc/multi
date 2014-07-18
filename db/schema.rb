@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140712164248) do
+ActiveRecord::Schema.define(version: 20140718225427) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -39,10 +39,10 @@ ActiveRecord::Schema.define(version: 20140712164248) do
     t.integer "user_id"
     t.boolean "admin",      default: false, null: false
     t.boolean "billing",    default: false, null: false
+    t.boolean "active",     default: true,  null: false
   end
 
-  add_index "user_accounts", ["account_id"], name: "index_user_accounts_on_account_id"
-  add_index "user_accounts", ["user_id"], name: "index_user_accounts_on_user_id"
+  add_index "user_accounts", ["account_id", "user_id"], name: "index_user_accounts_on_account_id_and_user_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
