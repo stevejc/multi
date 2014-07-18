@@ -54,6 +54,16 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def admin_user
+    current_user.user_accounts.where('user_id = ? and account_id=?', current_user.id, current_account.id).first.admin
+  end
+  helper_method :admin_user
+  
+  def billing_user
+    current_user.user_accounts.where('user_id = ? and account_id=?', current_user.id, current_account.id).first.billing
+  end
+  helper_method :billing_user
+  
 end
 
 

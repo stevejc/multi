@@ -38,10 +38,10 @@
         <ul class="nav navbar-nav navbar-left">
         <% if user_signed_in? %>
   				<li><%= link_to "Clients", clients_path %></li>
-  				<% if current_user == current_account.owner || current_user.user_accounts.where('user_id = ? and account_id=?', current_user.id, current_account.id).first.admin %>
+  				<% if current_user == current_account.owner || admin_user %>
     				<li><%= link_to "Users", users_path %></li>
     				<% end %>	
-  				<% if current_user == current_account.owner || current_user.user_accounts.where('user_id = ? and account_id=?', current_user.id, current_account.id).first.billing %>
+  				<% if current_user == current_account.owner || billing_user %>
     				<li><%= link_to "Settings", edit_account_path(current_account) %></li>
   				<% end %>					
   			<% else %>

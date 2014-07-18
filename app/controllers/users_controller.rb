@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     end
     
     def only_admin           
-      if current_account.owner_id != current_user.id && !current_user.user_accounts.where('user_id = ? and account_id=?', current_user.id, current_account.id).first.admin
+      if current_account.owner_id != current_user.id && !admin_user
         flash[:alert] = "You must be the account owner or admin user to access the users page."
         redirect_to root_path # halts request cycle
       end
@@ -51,4 +51,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, user_accounts_attributes: [:id, :admin, :billing] )
     end
+    
 end
