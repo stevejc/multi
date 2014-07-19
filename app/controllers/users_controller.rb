@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   
   def index
-    @users = current_account.users.all
+    @users = current_account.users.where('active = ?', true)
     @user = User.new
   end
   
@@ -29,8 +29,23 @@ class UsersController < ApplicationController
   
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    @user_account = @user.user_accounts(current_account).last
+    @user_account.active = false
+    @user_account.save
     redirect_to users_url, notice: 'User was successfully deleted.'
+  end
+  
+  def invite_user
+    @users = current_account.users.where('active = ?', true)
+    @user = User.invite!(:email => params[:user][:email], :name => params[:user][:name])
+    if @user.valid?
+      unless UserAccount.find_by(account_id: current_account.id, user_id: @user.id)
+        UserAccount.create(account_id: current_account.id, user_id: @user.id)    
+      end
+      redirect_to users_path, notice: 'Successfully Invited User!'
+    else
+      render "index"
+    end
   end
   
   private

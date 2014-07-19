@@ -25,7 +25,11 @@ class ApplicationController < ActionController::Base
   end
   
   def after_sign_in_path_for(resource_or_scoped)
-    session[:previous_url] || root_path
+    if session[:previous_url] !~ /users\/invitation\/accept\?invitation_token/
+      session[:previous_url] || root_path
+    else
+      root_path
+    end
   end
 
   private

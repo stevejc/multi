@@ -45,19 +45,23 @@
       <% end %>
       
       <h3 class="extra-margin-top">Invite User</h3>
-      <%= form_for(User.new, url: invite_path,
-                                          html: { class: 'row' }) do |f| %>
-        <div class="col-xs-4">
-          <%= f.text_field :name, placeholder: "Enter name", label: false, class: "form-control" %>
-        </div>
-        <div class="col-xs-4">
-          <%= f.text_field :email, placeholder: "Enter email", label: false, class: "form-control" %>
-        </div>
+      
+      <%= form_for @user, url: invite_path, html: { class: 'col-md-6' } do |f| %>
+          <%= form_group_for f, :name, opts= {:label => "Full Name"} do %>
+              <%= f.text_field :name, class: 'form-control', :autofocus => true %>
+          <% end %>
+          <%= form_group_for f, :email, opts= {:label => "Email"} do %>
+              <%= f.text_field :email, class: 'form-control col-xs-4' %>
+          <% end %>
+          <br><br>      
+
         <%= f.submit 'Invite User', class: 'btn btn-primary' %>
       <% end %>
     </div>
   </div>
 </div>
+
+
 
 
 

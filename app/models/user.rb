@@ -31,12 +31,13 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :validate_on_invite => true
   
   has_one :owned_account, class_name: 'Account', foreign_key: 'owner_id'
   has_many :user_accounts
   has_many :accounts, through: :user_accounts
   
   accepts_nested_attributes_for :user_accounts
+  
   
 end

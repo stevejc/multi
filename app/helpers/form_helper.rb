@@ -14,7 +14,9 @@ module FormHelper
     has_errors = form.object.errors[field].present?
 
     content_tag :div, class: "form-group #{'has-error' if has_errors}" do
-      concat form.label(label, class: 'control-label')
+      if label != false
+        concat form.label(label, class: 'control-label')
+      end
       concat capture(&block)
       concat errors_for(form, field)
     end
