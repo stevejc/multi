@@ -35,13 +35,17 @@ class ApplicationController < ActionController::Base
   private
 
   def current_account
-    session[:account] = current_user.user_accounts.first.account_id if session[:account].nil?
-    current_user.user_accounts.find_by_account_id(session[:account]).account
+    if current_user.user_accounts.where(active: true).count >= 1
+      session[:account] = current_user.user_accounts.first.account_id if session[:account].nil?
+      current_user.user_accounts.find_by_account_id(session[:account]).account
+    else
+      nil
+    end
   end
   helper_method :current_account
   
   def scope_current_account
-    Account.current_id = current_account.id if current_user
+    Account.current_id = current_account.id if current_user && current_user.user_accounts.where(active: true).count >= 1
     yield
   ensure
     Account.current_id = nil
