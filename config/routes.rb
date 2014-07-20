@@ -6,7 +6,6 @@ Multi::Application.routes.draw do
   resources :clients
   resources :users
   post 'invite', to: 'users#invite_user'
-  
   get 'pricing', to: 'welcome#pricing'
   get 'add_account', to: 'accounts#add_another_account'
 end

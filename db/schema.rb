@@ -14,11 +14,11 @@
 ActiveRecord::Schema.define(version: 20140718225427) do
 
   create_table "accounts", force: true do |t|
-    t.string   "name"
-    t.integer  "owner_id"
+    t.string   "name",                        null: false
+    t.integer  "owner_id",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "plan"
+    t.string   "plan",       default: "gold", null: false
     t.string   "phone"
     t.string   "email"
     t.text     "address"

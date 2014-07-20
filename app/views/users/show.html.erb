@@ -11,11 +11,13 @@
       <tr>
         <th>Admin</th>
         <th>Billing Liaison</th>
+        <th>Account Owner</th>
       </tr>
 
       <tr>
         <td><%= user_access(@user_account.admin) %></td>
         <td><%= user_access(@user_account.billing) %></td>
+        <td><%= user_access(current_account.owner_id == @user.id) %></td>
       </tr>
 
     </table>
