@@ -2,22 +2,13 @@
   <div class="panel-body">
     <%= render 'layouts/error' %>
     <h2>Edit Account Settings</h2>
-    <%= form_for @account do |f| %>
-      <%= form_group_for f, :name, opts= {:label => "Company Name"} do %>
-          <%= f.text_field :name, class: 'form-control', :autofocus => true %>
-      <% end %>
-      <%= form_group_for f, :phone, opts= {:label => "Company Phone"} do %>
-          <%= f.text_field :phone, class: 'form-control' %>
-      <% end %>
-      <%= form_group_for f, :email, opts= {:label => "Company Email"} do %>
-          <%= f.text_field :email, class: 'form-control' %>
-      <% end %>
-      <%= form_group_for f, :address, opts= {:label => "Company Address"} do %>
-          <%= f.text_area :address, class: 'form-control', rows: 5, cols: 40 %>
-      <% end %>
+    <%= form_for(@account, builder: BasicFormBuilder) do |f| %>
+      <%= f.text_field :name, :label => "Company Name", :autofocus => true %>
+      <%= f.text_field :phone, :label => "Company Phone" %>
+      <%= f.email_field :email, :label => "Company Email" %>
+      <%= f.text_area :address, :label => "Company Address", rows: 5, cols: 40 %>
       <%= f.submit class: 'btn btn-primary' %>
     <% end %>
-    
     
     <h4>Change Account Owner</h4>
     <%= form_for @account do |f| %>
