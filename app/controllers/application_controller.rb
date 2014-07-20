@@ -72,6 +72,13 @@ class ApplicationController < ActionController::Base
   end
   helper_method :billing_user
   
+  def verify_account
+    if !current_account
+      flash[:alert] = "You must create or be added to an account to access this page."
+      redirect_to root_path
+    end
+  end
+  
 end
 
 

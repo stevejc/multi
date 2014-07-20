@@ -1,0 +1,24 @@
+<% if user_signed_in? %>
+  <% if current_user.user_accounts.where(active: true).count > 1 %>
+    <div class="btn-group">
+      <%= link_to current_account.name, root_path, id: "header_button", class: "btn btn-default btn-lg" %>
+      <button type="button" id= "header_button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Switch Accounts</a></li>
+        <li class="divider"></li>
+        <% current_user.user_accounts.each do |user| %>
+          <li><%= link_to user.account.name, change_account_path(:user_account => { :id => user.account.id }), :method => :post %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% elsif current_user.user_accounts.where(active: true).count == 1 %>
+    <%= link_to current_account.name, root_path, class: "navbar-brand" %>
+  <% else %>
+    <%= link_to 'Multi', root_path, class: "navbar-brand" %>
+  <% end %>
+<% else %>
+  <%= link_to 'Multi', root_path, class: "navbar-brand" %>
+<% end %>

@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
   before_action :authenticate_user!, only: [:add_another_account] 
-  before_action :only_billing, only: [:edit, :update]
+  before_action :verify_account, only: [:edit, :update, :change_account, :destroy]
+  before_action :only_billing, only: [:edit, :update, :destroy]
 
   
   def add_another_account

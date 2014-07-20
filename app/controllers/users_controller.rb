@@ -51,13 +51,6 @@ class UsersController < ApplicationController
   end
   
   private
-    def verify_account
-      if !current_account
-        flash[:alert] = "You must create or be added to an account to access this page."
-        redirect_to root_path
-      end
-    end
-    
     def can_not_delete_owner
       if params[:id] == current_account.owner_id.to_s
         flash[:alert] = "You are not able to delete the owner of this account."

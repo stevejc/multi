@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   before_filter :authenticate_user!
+  before_action :verify_account
   
   def index
     @clients = Client.all
@@ -55,4 +56,5 @@ class ClientsController < ApplicationController
     def client_params
       params.require(:client).permit(:name, :address )
     end
+    
 end
