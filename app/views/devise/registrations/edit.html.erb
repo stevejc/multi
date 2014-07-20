@@ -33,13 +33,14 @@
       <%= f.submit "Update Account", class: 'btn btn-primary' %>
     <% end %>
 <br>
-    <%= form_tag change_account_path, :class => "row" do %> 
-      <div class="col-xs-8">
-        <%= collection_select :user_account, :id, current_user.user_accounts.map { |x| OpenStruct.new(:id => x.account_id, :name => x.account.name) }, :id, :name, {prompt: "Select an account"}, {class: "form-control"}  %>
-      </div>
-      <%= submit_tag "Select Account", class: "btn btn-large btn-primary" %>
-      
-    <% end %>
+<% if current_account %>
+  <%= form_tag change_account_path, :class => "row" do %> 
+    <div class="col-xs-8">
+      <%= collection_select :user_account, :id, current_user.user_accounts.where('active = ?', true).map { |x| OpenStruct.new(:id => x.account_id, :name => x.account.name) }, :id, :name, {prompt: "Select an account"}, {class: "form-control"}  %>
+    </div>
+    <%= submit_tag "Select Account", class: "btn btn-large btn-primary" %>    
+  <% end %>
+<% end %>
         <div>
     <%= link_to "  Add another account", add_account_path(:plan => 'gold') %>
     </div>

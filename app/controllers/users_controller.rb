@@ -32,8 +32,10 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user_account = @user.user_accounts(current_account).last
-    @user_account.active = false
-    @user_account.save
+    @user_account.update_attributes(active: false, billing: false, admin: false)
+    if @user == current_user
+      session[:account] = nil
+    end
     redirect_to users_url, notice: 'User was successfully deleted.'
   end
   
@@ -44,6 +46,9 @@ class UsersController < ApplicationController
       unless UserAccount.find_by(account_id: current_account.id, user_id: @user.id)
         UserAccount.create(account_id: current_account.id, user_id: @user.id)    
       end
+      @user_account = @user.user_accounts.find_by_account_id(current_account)
+      @user_account.active = true
+      @user_account.save
       redirect_to users_path, notice: 'Successfully Invited User!'
     else
       render "index"
