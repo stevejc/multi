@@ -3,10 +3,10 @@
     <%= render 'layouts/error' %>
     <h2>Edit Account Settings</h2>
     <%= form_for(@account, builder: BasicFormBuilder) do |f| %>
-      <%= f.text_field :name, :label => "Company Name", :autofocus => true %>
-      <%= f.text_field :phone, :label => "Company Phone" %>
-      <%= f.email_field :email, :label => "Company Email" %>
-      <%= f.text_area :address, :label => "Company Address", rows: 5, cols: 40 %>
+      <%= f.text_field :name, label: "Company Name", autofocus: true %>
+      <%= f.text_field :phone, label: "Company Phone" %>
+      <%= f.email_field :email, label: "Company Email" %>
+      <%= f.text_area :address, label: "Company Address", rows: 5, cols: 40 %>
       <%= f.submit class: 'btn btn-primary' %>
     <% end %>
     

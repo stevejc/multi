@@ -2,47 +2,28 @@
   <div class="panel-body">
     <h2>Update your account info</h2>
 
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-
-      <%= form_group_for f, :name do %>
-          <%= f.text_field :name, class: 'form-control', autofocus: true %>
-      <% end %>
-      
-      <%= form_group_for f, :email do %>
-          <%= f.text_field :email, class: 'form-control' %>
-      <% end %>
-
+    <%= form_for(resource, builder: BasicFormBuilder, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+      <%= f.text_field :name, autofocus: true %>
+      <%= f.text_field :email %>
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
-      
-      <%= form_group_for f, :password do %>
-          <%= f.password_field :password, class: 'form-control', :autocomplete => "off" %>
-      <% end %>
-      
-      <%= form_group_for f, :password_confirmation do %>
-          <%= f.password_field :password_confirmation, class: 'form-control' %>
-      <% end %>
-      
-    
-      <%= form_group_for f, :current_password do %>
-          <%= f.password_field :current_password, class: 'form-control' %>
-      <% end %>
-
-    
+      <%= f.password_field :password, :autocomplete => "off" %>
+      <%= f.password_field :password_confirmation %>
+      <%= f.password_field :current_password %>
       <%= f.submit "Update Account", class: 'btn btn-primary' %>
     <% end %>
-<br>
-<% if current_account %>
-  <%= form_tag change_account_path, :class => "row" do %> 
-    <div class="col-xs-8">
-      <%= collection_select :user_account, :id, current_user.user_accounts.where('active = ?', true).map { |x| OpenStruct.new(:id => x.account_id, :name => x.account.name) }, :id, :name, {prompt: "Select an account"}, {class: "form-control"}  %>
-    </div>
-    <%= submit_tag "Select Account", class: "btn btn-large btn-primary" %>    
-  <% end %>
-<% end %>
-        <div>
-    <%= link_to "  Add another account", add_account_path(:plan => 'gold') %>
+    <br>
+    <% if current_account %>
+      <%= form_tag change_account_path, :class => "row" do %> 
+        <div class="col-xs-8">
+          <%= collection_select :user_account, :id, current_user.user_accounts.where('active = ?', true).map { |x| OpenStruct.new(:id => x.account_id, :name => x.account.name) }, :id, :name, {prompt: "Select an account"}, {class: "form-control"}  %>
+        </div>
+        <%= submit_tag "Select Account", class: "btn btn-large btn-primary" %>    
+      <% end %>
+    <% end %>
+    <div>
+      <%= link_to "  Add another account", add_account_path(:plan => 'gold') %>
     </div>
   </div>
 </div>

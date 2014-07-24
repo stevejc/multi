@@ -45,18 +45,13 @@
       <% end %>
       
       <h3 class="extra-margin-top">Invite User</h3>
-      
-      <%= form_for @user, url: invite_path, html: { class: 'col-md-6' } do |f| %>
-          <%= form_group_for f, :name, opts= {:label => "Full Name"} do %>
-              <%= f.text_field :name, class: 'form-control' %>
-          <% end %>
-          <%= form_group_for f, :email, opts= {:label => "Email"} do %>
-              <%= f.text_field :email, class: 'form-control col-xs-4' %>
-          <% end %>
-          <br><br>      
-
-        <%= f.submit 'Invite User', class: 'btn btn-primary' %>
-      <% end %>
+      <div class='col-md-6' %>
+        <%= form_for @user, builder: BasicFormBuilder, url: invite_path do |f| %>
+          <%= f.text_field :name %>
+          <%= f.text_field :email %>
+          <%= f.submit 'Invite User', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

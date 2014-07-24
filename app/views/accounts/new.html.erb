@@ -5,26 +5,17 @@
       <h2>Free for a 30 Day Trial</h2>
     </div>
 
-    <%= form_for @account do |f| %>
+    <%= form_for @account, builder: BasicFormBuilder do |f| %>
       
-      <%= f.hidden_field :plan, :value => @account.plan %>
-      <%= form_group_for f, :name, opts= {:label => "Your Company or Organization"} do %>
-          <%= f.text_field :name, class: 'form-control' %>
-      <% end %>
+      <%= f.hidden_field :plan, value: @account.plan %>
+          <%= f.text_field :name, label: "Your Company or Organization", autofocus: true %>
+
       <% unless current_user %>
         <%= f.fields_for :owner do |o| %>
-          <%= form_group_for o, :name, opts= {:label => "Your Full Name"} do %>
-            <%= o.text_field :name, class: 'form-control', autofocus: true %>
-          <% end %>
-          <%= form_group_for o, :email do %>
-            <%= o.text_field :email, class: 'form-control', autofocus: true %>
-          <% end %>
-          <%= form_group_for o, :password do %>
-            <%= o.password_field :password, class: 'form-control' %>
-          <% end %>
-          <%= form_group_for o, :password_confirmation do %>
-            <%= o.password_field :password_confirmation, class: 'form-control' %>
-          <% end %>
+            <%= o.text_field :name, label: "Your Full Name" %>
+            <%= o.text_field :email %>
+            <%= o.password_field :password %>
+            <%= o.password_field :password_confirmation %>
         <% end %>
       <% end %>
 
