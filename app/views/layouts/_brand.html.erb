@@ -7,7 +7,7 @@
         <span class="sr-only">Toggle Dropdown</span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Switch Accounts</a></li>
+        <li class="dropdown-header">Switch Accounts</li>
         <li class="divider"></li>
         <% current_user.user_accounts.each do |user| %>
           <li><%= link_to user.account.name, change_account_path(:user_account => { :id => user.account.id }), :method => :post %></li>
