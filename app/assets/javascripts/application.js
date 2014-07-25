@@ -18,11 +18,3 @@
 
 
 
-jQuery(function($) {
-
-// makes tr's clickable
-$("tr[data-link]").click(function() {
-  window.location = this.dataset.link
-});
-
-})
