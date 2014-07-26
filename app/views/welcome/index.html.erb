@@ -1,7 +1,7 @@
-
-  <%= render 'layouts/error' %>
-  <div class="jumbotron">
-    <h1>Multitenant</h1>
-    <p>Create a Multitenant application using subdomains, devise, scoped so can create separate accounts for multiple users of each account.</p>
-    <%= link_to "Create Account", new_account_path(:plan => 'gold'), class: 'btn btn-primary btn-lg' %>
-  </div>
+<% provide(:title, 'Home | Multi') %>
+<%= render 'layouts/error' %>
+<div class="jumbotron">
+  <h1>Multitenant</h1>
+  <p>Create a Multitenant application using subdomains, devise, scoped so can create separate accounts for multiple users of each account.</p>
+  <%= link_to "Create Account", new_account_path(:plan => 'gold'), class: 'btn btn-primary btn-lg' %>
+</div>
