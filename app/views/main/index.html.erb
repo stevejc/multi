@@ -1,0 +1,16 @@
+<%= render 'layouts/error' %>
+<h2>Dashboard</h2>
+<% if current_account && current_user.user_accounts.where(account_id: current_account).take.active %>
+  <%= link_to clients_path do %> 
+      <span class="glyphicon glyphicon-plus"><br>
+      Add Client</span>
+  <% end %>
+<% elsif current_account && current_user == current_account.owner %>
+  <p>This account is not active. </p>
+<% else %>
+  <p> You do not have any accounts that are currently active. </p>
+
+<% end %>
+
+
+

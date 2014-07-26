@@ -15,9 +15,9 @@
       </ul>
     </div>
   <% elsif current_user.user_accounts.where(active: true).count == 1 %>
-    <%= link_to current_account.name, root_path, class: "navbar-brand" %>
+    <%= link_to current_account.name, main_path, class: "navbar-brand" %>
   <% else %>
-    <%= link_to 'Multi', root_path, class: "navbar-brand" %>
+    <%= link_to 'Multi', main_path, class: "navbar-brand" %>
   <% end %>
 <% else %>
   <%= link_to 'Multi', root_path, class: "navbar-brand" %>
