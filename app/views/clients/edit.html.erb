@@ -8,7 +8,7 @@
       <div class="form-actions">
         <%= f.submit class: 'btn btn-primary' %>
         <%= link_to 'Cancel', @client, :class => 'btn' %>
-        <%= link_to ' Delete', client_path(@client), confirm: 'Are you sure you want to delete this client, no take backsies?', method: :delete, :class => 'btn float_right' %>
+        <%= link_to ' Delete', client_path(@client), data: {confirm: 'Are you sure you want to delete this client, no take backsies?'}, method: :delete, :class => 'btn float_right' %>
       </div>
     <% end %>
   </div>
