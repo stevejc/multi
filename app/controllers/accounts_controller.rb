@@ -23,6 +23,8 @@ class AccountsController < ApplicationController
     if @account.save
       UserAccount.create(account_id: @account.id, user_id: @account.owner_id)
       session[:account] = @account.id
+      user = User.find(@account.owner_id)
+      sign_in user
       redirect_to root_path, notice: 'Successfully Created Account!'
     else
       render action: 'new'
