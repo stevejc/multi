@@ -29,11 +29,21 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 group :development, :test do
+  gem 'rspec-rails', '~> 2.14.0'
+  gem 'factory_girl_rails', '~> 4.2.1'
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'letter_opener'
+end
+
+group :test do
+  gem 'faker', '~> 1.1.2'
+  gem "capybara", "~> 2.1.0"
+  gem "database_cleaner", "~> 1.0.1"
+  gem "launchy", "~> 2.4.2"
+  gem "selenium-webdriver", "~> 2.39.0"
 end
 
 group :doc do
