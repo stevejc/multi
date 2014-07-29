@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Multi::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
   root 'welcome#index'
@@ -9,4 +11,5 @@ Multi::Application.routes.draw do
   get 'pricing', to: 'welcome#pricing'
   get 'add_account', to: 'accounts#add_another_account'
   get '/main' =>  'main#index'
+  mount Sidekiq::Web, at: '/sidekiq'
 end

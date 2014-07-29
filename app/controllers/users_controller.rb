@@ -41,7 +41,9 @@ class UsersController < ApplicationController
   
   def invite_user
     @users = current_account.users.where('active = ?', true)
-    @user = User.invite!(:email => params[:user][:email], :name => params[:user][:name])
+    @user = User.invite!(:email => params[:user][:email], :name => params[:user][:name]) do |u|
+      u.skip_invitation = true
+    end
     if @user.valid?
       unless UserAccount.find_by(account_id: current_account.id, user_id: @user.id)
         UserAccount.create(account_id: current_account.id, user_id: @user.id)    
@@ -49,6 +51,7 @@ class UsersController < ApplicationController
       @user_account = @user.user_accounts.find_by_account_id(current_account)
       @user_account.active = true
       @user_account.save
+      InvitesWorker.perform_in(2.minutes, @user.id)
       redirect_to users_path, notice: 'Successfully Invited User!'
     else
       render "index"
