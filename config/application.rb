@@ -22,6 +22,8 @@ module Multi
     # config.i18n.default_locale = :de
     config.action_view.field_error_proc = Proc.new {|html, instance| html}
     
+    config.exceptions_app = self.routes
+    
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: true,
