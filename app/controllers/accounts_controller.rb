@@ -73,7 +73,7 @@ class AccountsController < ApplicationController
 
   private
     def account_params
-      params.require(:account).permit(:owner_id, :name, :plan, :email, :phone, :address, owner_attributes: [:account_id, :name, :email, :password, :password_confirmation])
+      params.require(:account).permit(:owner_id, :name, :plan, :email, :phone, :address, :time_zone, owner_attributes: [:account_id, :name, :email, :password, :password_confirmation])
     end
     
     def only_billing            

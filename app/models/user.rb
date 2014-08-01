@@ -25,6 +25,7 @@
 #  invited_by_type        :string(255)
 #  invitations_count      :integer          default(0)
 #  name                   :string(255)
+#  time_zone              :string(255)
 #
 
 class User < ActiveRecord::Base

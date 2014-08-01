@@ -7,6 +7,10 @@
       <%= f.text_field :phone, label: "Company Phone" %>
       <%= f.email_field :email, label: "Company Email" %>
       <%= f.text_area :address, label: "Company Address", rows: 5, cols: 40 %>
+      <div class="form-group">
+        <%= f.label :time_zone, "Time Zone" %>
+        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {prompt: "Select a Time Zone"}, {class: "form-control"} %>
+      </div>
       <%= f.submit class: 'btn btn-primary' %>
     <% end %>
     

@@ -7,6 +7,7 @@
 #  user_id    :integer
 #  admin      :boolean          default(FALSE), not null
 #  billing    :boolean          default(FALSE), not null
+#  active     :boolean          default(TRUE), not null
 #
 
 class UserAccount < ActiveRecord::Base

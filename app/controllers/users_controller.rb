@@ -48,6 +48,10 @@ class UsersController < ApplicationController
       unless UserAccount.find_by(account_id: current_account.id, user_id: @user.id)
         UserAccount.create(account_id: current_account.id, user_id: @user.id)    
       end
+      if @user.time_zone.nil? && current_account.time_zone?
+        @user.time_zone = current_account.time_zone
+        @user.save
+      end
       @user_account = @user.user_accounts.find_by_account_id(current_account)
       @user_account.active = true
       @user_account.save

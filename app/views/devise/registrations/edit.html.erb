@@ -5,6 +5,10 @@
     <%= form_for(resource, builder: BasicFormBuilder, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
       <%= f.text_field :name, autofocus: true %>
       <%= f.text_field :email %>
+      <div class="form-group">
+        <%= f.label :time_zone, "Time Zone" %>
+        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {prompt: "Select a Time Zone"}, {class: "form-control"} %>
+      </div>
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
