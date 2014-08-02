@@ -24,7 +24,7 @@ class Account < ActiveRecord::Base
 
   validates :owner, presence: true
   validates :name, presence: true
-  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
+  #validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   accepts_nested_attributes_for :owner
       
